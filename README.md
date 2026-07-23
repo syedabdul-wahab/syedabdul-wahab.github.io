@@ -17,9 +17,9 @@ python3 -m http.server 8000
 
 ## Deploy — Option A: GitHub Pages (recommended)
 
-Gives you a free URL: **https://wahabshah009.github.io**
+Gives you a free URL: **https://syedabdul-wahab.github.io**
 
-1. Create a new repo on GitHub named exactly `wahabshah009.github.io`
+1. Create a new repo on GitHub named exactly `syedabdul-wahab.github.io`
    (public, empty — no README).
 2. From this folder:
    ```bash
@@ -27,11 +27,11 @@ Gives you a free URL: **https://wahabshah009.github.io**
    git add .
    git commit -m "Portfolio site"
    git branch -M main
-   git remote add origin https://github.com/wahabshah009/wahabshah009.github.io.git
+   git remote add origin https://github.com/syedabdul-wahab/syedabdul-wahab.github.io.git
    git push -u origin main
    ```
 3. On GitHub: **Settings → Pages** → confirm Source is `main` branch, `/ (root)`.
-4. The site is live at `https://wahabshah009.github.io` within a minute or two.
+4. The site is live at `https://syedabdul-wahab.github.io` within a minute or two.
 
 To update later (e.g. adding screenshots):
 ```bash
