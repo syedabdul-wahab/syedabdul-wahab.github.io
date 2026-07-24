@@ -150,56 +150,130 @@ img { max-width: 100%; display: block; }
 }
 .hero-socials a:hover { color: var(--text); background: var(--surface-hover); transform: translateY(-3px); }
 
-/* Phone mockup */
+/* ---------- Device family cluster ---------- */
 .hero-visual { position: relative; display: flex; justify-content: center; }
-.phone-frame {
-  width: min(280px, 70vw); aspect-ratio: 9 / 19;
-  border-radius: 44px;
-  background: #17171d;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow:
-    0 0 0 10px #101014,
-    0 0 0 11px rgba(255, 255, 255, 0.08),
-    0 40px 80px rgba(0, 0, 0, 0.6),
-    0 0 120px rgba(10, 132, 255, 0.12);
-  padding: 10px; position: relative; z-index: 2;
-  animation: floaty 7s ease-in-out infinite;
+.device-cluster {
+  position: relative;
+  width: min(480px, 100%);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
 }
 @keyframes floaty {
-  0%, 100% { transform: translateY(0) rotate(0.001deg); }
-  50% { transform: translateY(-14px) rotate(0.001deg); }
+  0%, 100% { transform: var(--tf, none) translateY(0); }
+  50% { transform: var(--tf, none) translateY(-13px); }
 }
-.phone-notch {
-  position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-  width: 34%; height: 22px; border-radius: 20px; background: #060608; z-index: 3;
+.device { position: absolute; animation: floaty 7s ease-in-out infinite; }
+.device-tag {
+  position: absolute; left: 50%; bottom: -26px; transform: translateX(-50%);
+  padding: 0.2rem 0.7rem; border-radius: 980px;
+  background: rgba(21, 21, 28, 0.9); border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap;
+  opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
 }
-.phone-screen {
-  width: 100%; height: 100%; border-radius: 34px; overflow: hidden;
-  background: linear-gradient(160deg, #101018, #0b0d16 60%, #0d1220);
-  position: relative;
-}
-.phone-screen img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
-.phone-placeholder { position: absolute; inset: 0; padding: 60px 22px 24px; display: flex; flex-direction: column; gap: 12px; }
-.code-line {
-  height: 9px; border-radius: 5px;
-  background: linear-gradient(90deg, rgba(10,132,255,0.5), rgba(94,92,230,0.35));
-  opacity: 0.55;
-}
-.code-line.indent { margin-left: 18px; background: linear-gradient(90deg, rgba(191,90,242,0.45), rgba(94,92,230,0.3)); }
-.code-line.indent-2 { margin-left: 36px; background: linear-gradient(90deg, rgba(48,209,88,0.45), rgba(100,210,255,0.3)); }
+.device:hover .device-tag { opacity: 1; transform: translateX(-50%) translateY(-4px); }
 
-.float-chip {
-  position: absolute; z-index: 3;
-  padding: 0.5rem 1rem; border-radius: 980px;
-  background: rgba(21, 21, 28, 0.85); border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  font-size: 0.82rem; font-weight: 600;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-  animation: floaty 6s ease-in-out infinite;
+/* MacBook — centerpiece */
+.macbook { bottom: 15%; left: 50%; --tf: translateX(-50%); width: 82%; z-index: 2; }
+.mac-lid {
+  background: #1b1b21; border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 14px; padding: 9px 9px 10px;
+  box-shadow: 0 26px 55px rgba(0, 0, 0, 0.5), 0 0 90px rgba(10, 132, 255, 0.08);
 }
-.chip-1 { top: 14%; left: 2%; color: #0a84ff; animation-delay: -1.5s; }
-.chip-2 { top: 48%; right: 0; color: #bf5af2; animation-delay: -3s; }
-.chip-3 { bottom: 10%; left: 8%; color: #30d158; animation-delay: -4.5s; }
+.mac-screen {
+  position: relative; aspect-ratio: 16 / 10; border-radius: 6px; overflow: hidden;
+  background: linear-gradient(160deg, #0f1420, #0b0d16 60%, #111726);
+  padding: 20px 22px;
+}
+.mac-camera { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #2a2a30; }
+.mac-code { display: flex; flex-direction: column; gap: 9px; margin-top: 4px; }
+.mac-code .ln, .iphone-ph span { height: 8px; border-radius: 4px; opacity: 0.6;
+  background: linear-gradient(90deg, rgba(10,132,255,0.55), rgba(94,92,230,0.32)); }
+.mac-code .ln.i { margin-left: 22px; background: linear-gradient(90deg, rgba(191,90,242,0.5), rgba(94,92,230,0.3)); }
+.mac-code .ln.i2 { margin-left: 44px; background: linear-gradient(90deg, rgba(48,209,88,0.5), rgba(100,210,255,0.3)); }
+.mac-base {
+  position: relative; left: 50%; transform: translateX(-50%);
+  width: 114%; height: 14px; margin-top: -1px;
+  background: linear-gradient(180deg, #2b2b32, #141418);
+  border-radius: 2px 2px 11px 11px;
+  box-shadow: 0 20px 26px rgba(0, 0, 0, 0.5);
+}
+.mac-base::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 15%; height: 5px; border-radius: 0 0 6px 6px; background: #0a0a0d;
+}
+
+/* iPhone — front right */
+.iphone { bottom: 4%; right: 0; width: 25%; z-index: 4; animation-duration: 6s; animation-delay: -2s; }
+.iphone-frame {
+  position: relative; aspect-ratio: 9 / 19; border-radius: 24px;
+  background: #17171d; border: 1px solid rgba(255, 255, 255, 0.16); padding: 4px;
+  box-shadow: 0 0 0 3px #0d0d11, 0 22px 44px rgba(0, 0, 0, 0.6);
+}
+.iphone-notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 34%; height: 9px; border-radius: 8px; background: #060608; z-index: 3; }
+.iphone-screen {
+  position: relative; height: 100%; border-radius: 20px; overflow: hidden;
+  background: linear-gradient(160deg, #101018, #0b0d16 60%, #0d1220);
+}
+.iphone-screen img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 2; }
+.iphone-ph { position: absolute; inset: 0; padding: 26px 9px 10px; display: flex; flex-direction: column; gap: 6px; }
+.iphone-ph span { height: 5px; }
+
+/* Apple Watch — front left */
+.watch { bottom: 6%; left: 1%; width: 19%; z-index: 4; display: flex; flex-direction: column; align-items: center; animation-duration: 6.5s; animation-delay: -3.5s; }
+.watch-band { width: 60%; height: 30px; background: linear-gradient(180deg, #2c313c, #1a1d24); }
+.watch-band-top { border-radius: 9px 9px 3px 3px; margin-bottom: -9px; }
+.watch-band-bottom { border-radius: 3px 3px 9px 9px; margin-top: -9px; }
+.watch-case {
+  position: relative; width: 100%; aspect-ratio: 1 / 1.16; border-radius: 32%;
+  background: #1a1a20; border: 1px solid rgba(255, 255, 255, 0.16); padding: 6px;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5); z-index: 2;
+}
+.watch-crown { position: absolute; right: -3px; top: 36%; width: 5px; height: 15px; border-radius: 3px; background: #3a3a42; }
+.watch-screen {
+  position: relative; width: 100%; height: 100%; border-radius: 26%;
+  background: radial-gradient(circle at 50% 38%, #10233d, #060608 82%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; overflow: hidden;
+}
+.w-time { font-size: 0.62rem; font-weight: 800; color: #30d158; letter-spacing: -0.02em; line-height: 1; }
+.w-ring {
+  width: 42%; aspect-ratio: 1; border-radius: 50%;
+  background: conic-gradient(#ff375f 0 72%, rgba(255,55,95,0.18) 0);
+  -webkit-mask: radial-gradient(circle, transparent 54%, #000 56%);
+  mask: radial-gradient(circle, transparent 54%, #000 56%);
+}
+
+/* Apple Vision Pro — floating top-left */
+.vision { top: 1%; left: 3%; width: 33%; z-index: 3; animation-duration: 7.5s; animation-delay: -1s; }
+.vision-strap {
+  position: absolute; top: 32%; left: -12%; right: -12%; height: 26%;
+  background: linear-gradient(180deg, #33343c, #1f2028); border-radius: 30px; z-index: 1;
+}
+.vision-body {
+  position: relative; z-index: 2; aspect-ratio: 2.15 / 1;
+  border-radius: 44% / 52%;
+  background: linear-gradient(155deg, #34343d, #17171c 80%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.5), inset 0 3px 7px rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+/* aluminium top rim highlight */
+.vision-body::before {
+  content: ""; position: absolute; top: 0; left: 8%; right: 8%; height: 30%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.22), transparent);
+  border-radius: 50%;
+}
+.vision-glass {
+  position: absolute; inset: 20% 7% 16%; border-radius: 44% / 58%;
+  background: linear-gradient(150deg, rgba(80,110,160,0.7), rgba(30,50,90,0.6) 40%, rgba(8,10,16,0.95) 78%);
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.7), inset 0 1px 3px rgba(255,255,255,0.15);
+}
+.vision-glass::after {
+  content: ""; position: absolute; top: 14%; left: 8%; width: 46%; height: 34%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.45), transparent);
+  border-radius: 50%; filter: blur(2px);
+}
 
 /* Stats */
 .hero-stats {
