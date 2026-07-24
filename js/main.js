@@ -80,5 +80,22 @@ filterButtons.forEach((btn) => {
   });
 });
 
+// ---------- Live Apple Watch clock ----------
+const watchTime = document.getElementById('watchTime');
+const updateWatch = () => {
+  if (!watchTime) return;
+  const now = new Date();
+  let h = now.getHours() % 12;
+  if (h === 0) h = 12;
+  const m = now.getMinutes().toString().padStart(2, '0');
+  watchTime.textContent = `${h}:${m}`;
+};
+updateWatch();
+// re-sync at the top of the next minute, then every minute
+setTimeout(() => {
+  updateWatch();
+  setInterval(updateWatch, 60 * 1000);
+}, (60 - new Date().getSeconds()) * 1000);
+
 // ---------- Footer year ----------
 document.getElementById('year').textContent = new Date().getFullYear();
