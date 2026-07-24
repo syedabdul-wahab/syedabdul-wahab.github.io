@@ -244,63 +244,10 @@ img { max-width: 100%; display: block; }
   mask: radial-gradient(circle, transparent 54%, #000 56%);
 }
 
-/* Apple Vision Pro — large, centered hero device */
+/* Apple Vision Pro — large, centered hero device (SVG) */
 .vision { top: 2%; left: 50%; --tf: translateX(-50%); width: 72%; z-index: 4; animation-duration: 7.5s; animation-delay: -1s; }
-/* light-gray knit head strap peeking from behind on both sides */
-.vision-strap {
-  position: absolute; top: 33%; left: -9%; right: -9%; height: 40%; z-index: 1;
-  background:
-    repeating-linear-gradient(89deg, rgba(0,0,0,0.07) 0 3px, rgba(255,255,255,0.14) 3px 7px),
-    linear-gradient(180deg, #dcdce1 0%, #b6b6be 55%, #909098 100%);
-  border-radius: 44px;
-  box-shadow: inset 0 -4px 8px rgba(0,0,0,0.28), inset 0 2px 3px rgba(255,255,255,0.6), 0 8px 18px rgba(0,0,0,0.35);
-}
-/* silver aluminium frame */
-.vision-body {
-  position: relative; z-index: 2; aspect-ratio: 1.95 / 1;
-  border-radius: 44% 44% 44% 44% / 54% 54% 48% 48%;
-  padding: 4% 3.5% 5.5%;
-  background: linear-gradient(180deg, #f4f4f6 0%, #d2d2d9 20%, #9c9ca6 62%, #6c6c76 100%);
-  box-shadow:
-    0 26px 48px rgba(0, 0, 0, 0.6),
-    inset 0 2px 3px rgba(255, 255, 255, 0.85),
-    inset 0 -5px 10px rgba(0, 0, 0, 0.3);
-}
-/* front laminated glass visor — dark, glossy, curved, dominant */
-.vision-glass {
-  position: relative; width: 100%; height: 100%;
-  border-radius: 44% 44% 44% 44% / 54% 54% 48% 48%;
-  background: linear-gradient(175deg, #1c2740 0%, #0e1526 42%, #05070d 100%);
-  box-shadow:
-    inset 0 2px 5px rgba(255, 255, 255, 0.4),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.18),
-    inset 0 -9px 22px rgba(0, 0, 0, 0.75);
-  overflow: hidden;
-}
-/* glossy highlight arc across the top of the glass */
-.vision-glass::before {
-  content: ""; position: absolute; top: 0; left: 5%; right: 5%; height: 44%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.32), transparent 78%);
-  border-radius: 50%;
-}
-/* signature EyeSight aurora reflection — pink → purple → blue */
-.vision-aurora {
-  position: absolute; left: 10%; right: 10%; top: 33%; height: 50%;
-  border-radius: 50%;
-  background:
-    radial-gradient(58% 100% at 22% 52%, rgba(255, 95, 125, 0.9), transparent 62%),
-    radial-gradient(60% 100% at 52% 44%, rgba(150, 92, 240, 0.88), transparent 64%),
-    radial-gradient(64% 100% at 82% 56%, rgba(58, 150, 255, 0.92), transparent 62%);
-  filter: blur(5px);
-  opacity: 0.92;
-}
-/* subtle lower sensor dots */
-.vision-cam {
-  position: absolute; bottom: 8%; left: 50%; transform: translateX(-50%);
-  width: 7px; height: 7px; border-radius: 50%;
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: -12px 2px 0 -1px rgba(0,0,0,0.5), 12px 2px 0 -1px rgba(0,0,0,0.5), inset 0 0 3px rgba(255,255,255,0.15);
-}
+.vision-svg { width: 100%; height: auto; display: block; filter: drop-shadow(0 26px 46px rgba(0, 0, 0, 0.6)); }
+.vp-strap { filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3)); }
 
 /* Stats */
 .hero-stats {

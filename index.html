@@ -9,7 +9,7 @@
   <meta property="og:description" content="SwiftUI Specialist. 18+ apps shipped across iOS, macOS, visionOS & watchOS." />
   <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#63743;</text></svg>" />
-  <link rel="stylesheet" href="css/style.css?v=4" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
 </head>
 <body>
 
@@ -73,15 +73,62 @@
       <div class="hero-visual reveal">
         <div class="device-cluster">
 
-          <!-- Apple Vision Pro -->
+          <!-- Apple Vision Pro (SVG for true goggle silhouette) -->
           <div class="device vision" title="visionOS">
-            <div class="vision-strap"></div>
-            <div class="vision-body">
-              <div class="vision-glass">
-                <span class="vision-aurora"></span>
-                <span class="vision-cam"></span>
-              </div>
-            </div>
+            <svg class="vision-svg" viewBox="0 0 400 214" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Apple Vision Pro">
+              <defs>
+                <linearGradient id="vpFrame" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#f6f6f8"/>
+                  <stop offset="0.22" stop-color="#d4d4db"/>
+                  <stop offset="0.62" stop-color="#9c9ca6"/>
+                  <stop offset="1" stop-color="#63636d"/>
+                </linearGradient>
+                <linearGradient id="vpStrap" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#dedee3"/>
+                  <stop offset="0.55" stop-color="#b4b4bc"/>
+                  <stop offset="1" stop-color="#8a8a93"/>
+                </linearGradient>
+                <linearGradient id="vpGlass" x1="0.15" y1="0" x2="0.85" y2="1">
+                  <stop offset="0" stop-color="#1e2942"/>
+                  <stop offset="0.45" stop-color="#0f1626"/>
+                  <stop offset="1" stop-color="#04060c"/>
+                </linearGradient>
+                <linearGradient id="vpTopHi" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffffff" stop-opacity="0.42"/>
+                  <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+                </linearGradient>
+                <filter id="vpBlur" x="-40%" y="-40%" width="180%" height="180%">
+                  <feGaussianBlur stdDeviation="10"/>
+                </filter>
+                <clipPath id="vpGlassClip">
+                  <path d="M44 74 C44 42 100 30 200 30 C300 30 356 42 356 74 C356 110 345 138 310 160 C290 173 266 174 249 165 C236 158 227 145 210 141 C203 139 197 139 190 141 C173 145 164 158 151 165 C134 174 110 173 90 160 C55 138 44 110 44 74 Z"/>
+                </clipPath>
+              </defs>
+
+              <!-- knit head strap peeking behind -->
+              <rect class="vp-strap" x="4"   y="82" width="70" height="62" rx="28" fill="url(#vpStrap)"/>
+              <rect class="vp-strap" x="326" y="82" width="70" height="62" rx="28" fill="url(#vpStrap)"/>
+
+              <!-- aluminium frame (true goggle silhouette with nose-bridge dip) -->
+              <path d="M28 72 C28 30 92 14 200 14 C308 14 372 30 372 72 C372 112 360 144 322 168 C300 182 272 183 252 173 C236 165 226 150 210 146 C203 144 197 144 190 146 C174 150 164 165 148 173 C128 183 100 182 78 168 C40 144 28 112 28 72 Z"
+                    fill="url(#vpFrame)"/>
+
+              <!-- dark laminated glass + aurora, clipped to inner shape -->
+              <g clip-path="url(#vpGlassClip)">
+                <path d="M44 74 C44 42 100 30 200 30 C300 30 356 42 356 74 C356 110 345 138 310 160 C290 173 266 174 249 165 C236 158 227 145 210 141 C203 139 197 139 190 141 C173 145 164 158 151 165 C134 174 110 173 90 160 C55 138 44 110 44 74 Z" fill="url(#vpGlass)"/>
+                <!-- signature EyeSight aurora reflection -->
+                <g filter="url(#vpBlur)" opacity="0.9">
+                  <ellipse cx="150" cy="110" rx="54" ry="26" fill="#ff5f7d"/>
+                  <ellipse cx="205" cy="102" rx="60" ry="28" fill="#8a5cf0"/>
+                  <ellipse cx="262" cy="112" rx="60" ry="26" fill="#3a96ff"/>
+                </g>
+                <!-- glossy top highlight -->
+                <ellipse cx="200" cy="46" rx="150" ry="40" fill="url(#vpTopHi)"/>
+                <!-- lower sensor dots -->
+                <circle cx="176" cy="150" r="4" fill="#000" opacity="0.55"/>
+                <circle cx="224" cy="150" r="4" fill="#000" opacity="0.55"/>
+              </g>
+            </svg>
             <span class="device-tag">visionOS</span>
           </div>
 
