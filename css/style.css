@@ -245,34 +245,48 @@ img { max-width: 100%; display: block; }
 }
 
 /* Apple Vision Pro — floating top-left */
-.vision { top: 1%; left: 3%; width: 33%; z-index: 3; animation-duration: 7.5s; animation-delay: -1s; }
+.vision { top: 2%; left: 4%; width: 35%; z-index: 3; animation-duration: 7.5s; animation-delay: -1s; }
+/* knit head strap peeking from behind on both sides */
 .vision-strap {
-  position: absolute; top: 32%; left: -12%; right: -12%; height: 26%;
-  background: linear-gradient(180deg, #33343c, #1f2028); border-radius: 30px; z-index: 1;
+  position: absolute; top: 30%; left: -14%; right: -14%; height: 40%; z-index: 1;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 5px),
+    linear-gradient(180deg, #3a3b44, #202128 90%);
+  border-radius: 40px;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,0.4);
 }
+/* aluminium frame */
 .vision-body {
-  position: relative; z-index: 2; aspect-ratio: 2.15 / 1;
-  border-radius: 44% / 52%;
-  background: linear-gradient(155deg, #34343d, #17171c 80%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.5), inset 0 3px 7px rgba(255, 255, 255, 0.16);
+  position: relative; z-index: 2; aspect-ratio: 2.4 / 1;
+  border-radius: 48% / 46%;
+  padding: 6%;
+  background: linear-gradient(180deg, #6d7079 0%, #45474f 34%, #2a2b31 100%);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.55), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+}
+/* front laminated glass visor — dominant, glossy, curved */
+.vision-glass {
+  position: relative; width: 100%; height: 100%;
+  border-radius: 46% / 52%;
+  background:
+    radial-gradient(120% 90% at 30% 15%, rgba(120,150,200,0.55), transparent 45%),
+    linear-gradient(165deg, #2b3b56 0%, #16233c 40%, #070a12 100%);
+  box-shadow:
+    inset 0 2px 6px rgba(255,255,255,0.22),
+    inset 0 -6px 16px rgba(0,0,0,0.6),
+    inset 0 0 30px rgba(0,0,0,0.45);
   overflow: hidden;
 }
-/* aluminium top rim highlight */
-.vision-body::before {
-  content: ""; position: absolute; top: 0; left: 8%; right: 8%; height: 30%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.22), transparent);
-  border-radius: 50%;
+/* bright diagonal reflection streak across the glass */
+.vision-glass::before {
+  content: ""; position: absolute; top: -20%; left: -10%; width: 70%; height: 130%;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.28) 48%, rgba(255,255,255,0.05) 58%, transparent 70%);
+  transform: rotate(8deg);
 }
-.vision-glass {
-  position: absolute; inset: 20% 7% 16%; border-radius: 44% / 58%;
-  background: linear-gradient(150deg, rgba(80,110,160,0.7), rgba(30,50,90,0.6) 40%, rgba(8,10,16,0.95) 78%);
-  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.7), inset 0 1px 3px rgba(255,255,255,0.15);
-}
+/* soft EyeSight-style inner glow */
 .vision-glass::after {
-  content: ""; position: absolute; top: 14%; left: 8%; width: 46%; height: 34%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.45), transparent);
-  border-radius: 50%; filter: blur(2px);
+  content: ""; position: absolute; inset: 22% 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 45%, rgba(70,110,170,0.35), transparent 70%);
 }
 
 /* Stats */
