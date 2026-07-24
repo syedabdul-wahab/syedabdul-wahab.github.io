@@ -116,7 +116,7 @@ const probeGallery = (slug, max = 12) =>
   });
 
 const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lbImg');
+const lbMedia = document.getElementById('lbMedia');
 const lbCap = document.getElementById('lbCap');
 const lbDots = document.getElementById('lbDots');
 let lbShots = [];
@@ -125,8 +125,7 @@ let lbIndex = 0;
 const renderLb = () => {
   const shot = lbShots[lbIndex];
   if (!shot) return;
-  lbImg.src = shot.src;
-  lbImg.alt = shot.cap || '';
+  lbMedia.innerHTML = `<img src="${shot.src}" alt="${shot.cap || ''}" />`;
   lbCap.textContent = shot.cap || '';
   lbDots.querySelectorAll('.lb-dot').forEach((d, i) =>
     d.classList.toggle('active', i === lbIndex)
@@ -154,6 +153,7 @@ const closeLb = () => {
   lightbox.classList.remove('open');
   lightbox.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  lbMedia.innerHTML = ''; // stop any playing video
 };
 const nextLb = () => { lbIndex = (lbIndex + 1) % lbShots.length; renderLb(); };
 const prevLb = () => { lbIndex = (lbIndex - 1 + lbShots.length) % lbShots.length; renderLb(); };
@@ -168,37 +168,71 @@ document.addEventListener('keydown', (e) => {
   else if (e.key === 'ArrowRight') nextLb();
   else if (e.key === 'ArrowLeft') prevLb();
 });
-// swipe support on the image
+// swipe support on the media stage
 let touchX = null;
-lbImg.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
-lbImg.addEventListener('touchend', (e) => {
+lbMedia.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+lbMedia.addEventListener('touchend', (e) => {
   if (touchX === null) return;
   const dx = e.changedTouches[0].clientX - touchX;
   if (Math.abs(dx) > 40) (dx < 0 ? nextLb() : prevLb());
   touchX = null;
 }, { passive: true });
 
-// Auto-detect each project's screenshot folder + wire up gallery & badge
+// Auto-detect each project's screenshots → auto-cycling carousel + lightbox
 const camIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>';
+
 document.querySelectorAll('.project-card').forEach(async (card) => {
   const slug = card.dataset.slug;
   const title = card.querySelector('h3')?.textContent.trim() || 'Project';
-  const shots = await probeGallery(slug);
-  if (!shots.length) return;
-  // fill in fallback captions for any without a custom one
-  shots.forEach((s, i) => { if (!s.cap) s.cap = `${title} — ${i + 1} / ${shots.length}`; });
+  const images = await probeGallery(slug);
+  if (!images.length) return;
+  images.forEach((s, i) => { if (!s.cap) s.cap = `${title} — ${i + 1} / ${images.length}`; });
 
   card.classList.add('has-gallery');
   const media = card.querySelector('.project-media');
-  if (media) {
-    const badge = document.createElement('span');
-    badge.className = 'gallery-badge';
-    badge.innerHTML = `${camIcon}${shots.length}`;
-    media.appendChild(badge);
+
+  // Build cross-fading carousel layers (replaces the static thumbnail)
+  media.querySelectorAll('img').forEach((im) => im.remove());
+  const layers = images.map((s, i) => {
+    const im = document.createElement('img');
+    im.src = s.src;
+    im.alt = title;
+    im.loading = 'lazy';
+    im.className = 'carousel-img' + (i === 0 ? ' active' : '');
+    media.insertBefore(im, media.firstChild);
+    return im;
+  });
+
+  // count badge
+  const badge = document.createElement('span');
+  badge.className = 'gallery-badge';
+  badge.innerHTML = `${camIcon}${images.length}`;
+  media.appendChild(badge);
+
+  // Auto-advance (cross-fade) — runs only while the card is on-screen,
+  // pauses on hover so the visitor can look.
+  if (layers.length > 1) {
+    let idx = 0;
+    let timer = null;
+    let hovered = false;
+    let onScreen = false;
+    const tick = () => {
+      layers[idx].classList.remove('active');
+      idx = (idx + 1) % layers.length;
+      layers[idx].classList.add('active');
+    };
+    const start = () => { if (!timer && onScreen && !hovered) timer = setInterval(tick, 2600); };
+    const stop = () => { clearInterval(timer); timer = null; };
+    card.addEventListener('mouseenter', () => { hovered = true; stop(); });
+    card.addEventListener('mouseleave', () => { hovered = false; start(); });
+    new IntersectionObserver((entries) => {
+      entries.forEach((e) => { onScreen = e.isIntersecting; onScreen ? start() : stop(); });
+    }, { threshold: 0.2 }).observe(card);
   }
+
   card.addEventListener('click', (e) => {
     if (e.target.closest('.appstore-link')) return; // let App Store link work
-    openLb(shots, 0);
+    openLb(images, 0);
   });
 });
 

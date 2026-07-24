@@ -6,9 +6,10 @@ To add screenshots for a project, just drop image files into its folder named
 
 **That's it — no code changes needed.** The site auto-detects them:
 
-- `1.png` becomes the **card thumbnail** in the projects grid.
-- All images (`1.png`, `2.png`, …) open in a **swipeable lightbox gallery**
-  when the card is clicked (with a 📷 count badge shown on the card).
+- On the card, the screenshots **auto-cycle as a carousel** (cross-fading every
+  few seconds; pauses on hover). A 📷 count badge shows how many there are.
+- Clicking the card opens all images in a **swipeable lightbox gallery**
+  (arrows, keyboard ←/→, dots, ESC to close).
 - A project with no images just shows its colored placeholder, as before.
 
 ## Folders (slug → project)
